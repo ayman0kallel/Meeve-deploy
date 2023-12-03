@@ -1,34 +1,42 @@
 
 import bcrypt from 'bcrypt';
 import db from '../models/db.js';
+import jwt from 'jsonwebtoken';
 
 let users = [];
 
 export const createUser = async (req, res) => {
   const { firstname, lastname, email, password } = req.body;
 
-  // Check if the email already exists in the database
-  const existingUser = await checkUserExistsByEmail(email);
-  if (existingUser) {
-    return res.status(409).json({ error: 'Email address already in use.' });
-  }
-
   try {
-    // Hash the password before storing it
-    const hashedPassword = await bcrypt.hash(password, 10);
+    // Check if the email already exists in the database
+    const emailCheckQuery = 'SELECT * FROM users WHERE email = ?';
+    db.query(emailCheckQuery, [email], async (err, results) => {
+      if (err) {
+        console.error('Error querying database:', err);
+        return res.status(500).json({ error: 'Internal server error' });
+      }
 
-    // Insert the user into the database
-    const sql = `
-      INSERT INTO users (firstname, lastname, email, password)
-      VALUES (?, ?, ?, ?)
-    `;
-    const [result] = await db.execute(sql, [firstname, lastname, email, hashedPassword]);
+      if (results.length > 0) {
+        return res.status(409).json({ error: 'Email address already in use.' });
+      }
 
-    if (result.affectedRows === 1) {
-      res.status(201).json({ message: 'User added to the database.' });
-    } else {
-      res.status(500).json({ error: 'Failed to add user to the database.' });
-    }
+      // Email doesn't exist, proceed to create the user
+      const hashedPassword = await bcrypt.hash(password, 10);
+      const insertUserQuery = 'INSERT INTO users (firstname, lastname, email, password) VALUES (?, ?, ?, ?)';
+      db.query(insertUserQuery, [firstname, lastname, email, hashedPassword], (insertErr, result) => {
+        if (insertErr) {
+          console.error('Error adding user:', insertErr);
+          return res.status(500).json({ error: 'Failed to add user to the database.' });
+        }
+
+        if (result.affectedRows === 1) {
+          res.status(201).json({ message: 'User added to the database.' });
+        } else {
+          res.status(500).json({ error: 'Failed to add user to the database.' });
+        }
+      });
+    });
   } catch (error) {
     console.error('Error adding user:', error);
     res.status(500).json({ error: 'Internal server error.' });
@@ -45,32 +53,30 @@ const checkUserExistsByEmail = async (email) => {
 export const loginUser = async (req, res) => {
   const { email, password } = req.body;
 
-  try {
-    // Check if the user with the provided email exists in the database
-    const [users] = await db.execute('SELECT * FROM users WHERE email = ?', [email]);
+  db.query(
+    "SELECT * FROM users WHERE email = ?;", email, (err, result) => {
+      if(err) {
+        res.send({err: err});
+      }
 
-    // If no user found, return an error
-    if (users.length === 0) {
-      return res.status(401).json({ error: 'Invalid email or password' });
+      if(result.length > 0) {
+        bcrypt.compare(password, result[0].password, (error, response) => {
+          if(response) {
+            const id = result[0].id
+            const token = jwt.sign({id}, "jwtMeeve", {
+              expiresIn: 300,
+            })
+
+            res.json({auth: true, token: token, result: result});
+          } else {
+            res.json({auth: false, message: "Wrong email/password combination"});
+          }
+        });
+      } else {
+        res.json({auth: false, message: "no user exists"});
+      }
     }
-
-    // Compare the provided password with the hashed password from the database
-    const user = users[0];
-    const passwordMatch = await bcrypt.compare(password, user.password);
-
-    // If passwords don't match, return an error
-    if (!passwordMatch) {
-      return res.status(401).json({ error: 'Invalid email or password' });
-    }
-
-    // If passwords match, you can generate a JWT token here for authentication
-
-    // Return a success message or the JWT token to the client
-    res.status(200).json({ message: 'Login successful', user: { id: user.id, email: user.email } });
-  } catch (error) {
-    console.error('Error logging in:', error);
-    res.status(500).json({ error: 'Internal server error' });
-  }
+  );
 };
 
 

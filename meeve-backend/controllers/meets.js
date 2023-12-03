@@ -1,7 +1,5 @@
 import db from '../models/db.js';
 
-let meets = [];
-
 export const createMeet = async (req, res) => {
   const { sport, date, time, location, author } = req.body;
 

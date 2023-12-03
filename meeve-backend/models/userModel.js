@@ -1,4 +1,4 @@
-import db from './db.js'; // Import the database connection
+/*import db from './db.js'; // Import the database connection
 
 export const createUserTable = async () => {
   try {
@@ -20,5 +20,5 @@ export const createUserTable = async () => {
   } catch (error) {
     console.error('Error creating user table:', error);
   }
-}; 
+}; */
 
