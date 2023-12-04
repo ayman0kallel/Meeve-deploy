@@ -42,15 +42,8 @@ const theme = createTheme({
   },
 });
 
-const PopupCard = () => {
-    const meetInformation = {
-      title: 'Fitness',
-      image: 'https://images.pexels.com/photos/28061/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-      date: 'Vendredi 12 Juilliet',
-      time: '9h - 12h',
-      place: 'Lyon Part-dieu',
-      creator: 'Davis',
-    };
+const PopupCard = ({ meetInformation }) => {
+    
   
     return (
       <div className="popup-card-container">
