@@ -1,35 +1,37 @@
 import Layout from "../components/Layout/Layout";
 import TinderCard from 'react-tinder-card';
 import '../match.css';
-import React, { useState , useRef, useMemo } from "react";
+import React, { useState , useRef, useMemo, useEffect } from "react";
 import CardSwipe from "../components/CardSwipe";
 import logo from "../assets/img/LOGO.png";
 import CancelIcon from '@mui/icons-material/Cancel';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { Button } from "@mui/material";
+import axios from "axios";
+import dayjs from "dayjs";
+
+
+//TODO : fix boutons swipe
 
 const MatchPage = () => {
 
-    const meets = [
-        {
-            name: 'Salle de sport',
-            lieu: 'Lyon Part-Dieu',
-            heure: '14h-15h',
-            date: 'Jeudi 11 novembre',
-            url: 'https://img.freepik.com/vecteurs-libre/personnes-faisant-exercice-dans-salle-fitness-equipement-sport-pour-seances-entrainement_575670-1883.jpg?w=1380&t=st=1699287564~exp=1699288164~hmac=604f69e7def2bfa99c6666e6dbf86128c7616d02e4b30bdb309a7ba2035aa723'
-        },
-        {
-            name: 'Gymnastique',
-            lieu: 'Lyon 3',
-            heure: '14h-15h',
-            date: 'Jeudi 22 decembre',
-            url: 'https://images.pexels.com/photos/3757955/pexels-photo-3757955.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
-        }
-    ]
-
+    const [user, setUser] = useState(null);
+    const [meets, setMeets] = useState([]);
     const [currentIndex, setCurrentIndex] = useState(meets.length - 1)
     const [lastDirection, setLastDirection] = useState();
     const currentIndexRef = useRef(currentIndex);
+
+    useEffect(() => {
+        const fetchAllMeets = async () => {
+            try {
+                const res = await axios.get("http://localhost:5000/meets")
+                setMeets(res.data);
+            } catch(err) {
+                console.log(err)
+            }
+        }
+        fetchAllMeets()
+    }, [])
 
     const childRefs = useMemo(
         () =>
@@ -52,8 +54,8 @@ const MatchPage = () => {
         updateCurrentIndex(index - 1)
     }
 
-    const outOfFrame = (name, idx) => {
-        console.log(`${name} (${idx}) left the screen!`, currentIndexRef.current)
+    const outOfFrame = (id, idx) => {
+        console.log(`${id} (${idx}) left the screen!`, currentIndexRef.current)
         // handle the case in which go back is pressed before card goes outOfFrame
         currentIndexRef.current >= idx && childRefs[idx].current.restoreCard();
     }
@@ -63,12 +65,6 @@ const MatchPage = () => {
           await childRefs[currentIndex].current.swipe(dir) // Swipe the card!
         }
     
-    }
-
-    const goBack = async () => {
-        const newIndex = currentIndex + 1
-        updateCurrentIndex(newIndex)
-        await childRefs[newIndex].current.restoreCard()
     }
 
     return (
@@ -83,18 +79,18 @@ const MatchPage = () => {
                         <TinderCard 
                             ref={childRefs[index]}
                             className='swipe'
-                            key={meet.name}
-                            onSwipe={(dir) => swiped(dir, meet.name, index)} 
-                            onCardLeftScreen={() => outOfFrame(meet.name, index)} >
+                            key={meet.id}
+                            onSwipe={(dir) => swiped(dir, meet.id, index)} 
+                            onCardLeftScreen={() => outOfFrame(meet.id, index)} >
                             <div className="card">
                                 <div className="meet-image">
-                                    <img className="img-meet" src={meet.url} alt="meet-image"></img>
+                                    <img className="img-meet" src={meet.image} alt="meet-image"></img>
                                 </div>
                                 <CardSwipe
                                     title={meet.name}
-                                    date={meet.date}
-                                    time={meet.heure}
-                                    place={meet.lieu}
+                                    date={dayjs(meet.date).format("DD/MM/YYYY")}
+                                    time={meet.time}
+                                    place={meet.location}
                                 />
                             </div>
                         </TinderCard>
@@ -110,6 +106,13 @@ const MatchPage = () => {
                     </Button>
                     
                 </div>
+                {lastDirection ? (
+                    <h2 key={lastDirection} className="infoText">
+                        You swiped {lastDirection}
+                    </h2>
+                ) : (
+                    <h2>swipe a card or press a button</h2>
+                )}
             </div> 
         </Layout>
     )

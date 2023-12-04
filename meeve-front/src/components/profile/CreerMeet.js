@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Layout from '../Layout/Layout';
 import TextField from '@mui/material/TextField';
@@ -26,6 +26,7 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 import Grid from '@mui/material/Grid';
 import parse from 'autosuggest-highlight/parse';
 import { debounce } from '@mui/material/utils';
+import axios from 'axios';
 
 const GOOGLE_MAPS_API_KEY = 'AIzaSyCPGSHVtCPu2WInyU8cHwsLxhTUnfSqD4E';
 
@@ -70,18 +71,11 @@ const theme = createTheme({
     },
   });
 
-// Sports
-const sports = [
-  { label: 'Fitness'},
-  { label: 'Abdos'},
-  { label: 'Streching'},
-  { label: 'Musculation'},
-  { label: 'Boxe'},
-  { label: 'Danse Classique'},
-  { label: 'Danse Orientale'},
-];
-
   const CreerMeet = () => {
+    
+    // sports
+    const [sports, setSports] = useState([]);
+    const [selectedSport, setSelectedSport] = useState(null);
     //heure
     const [value, setValue] = React.useState(dayjs('2022-04-17T15:30'));
     // google maps
@@ -100,6 +94,23 @@ const sports = [
       }
   
       loaded.current = true;
+    }
+
+
+    useEffect(() => {
+      const fetchAllSports = async () => {
+        try {
+            const res = await axios.get("http://localhost:5000/sports")
+            setSports(res.data);
+        } catch(err) {
+            console.log(err)
+        }
+      }
+      fetchAllSports()
+    }, [])
+
+    const handleSportChange = (event, value) => {
+      setSelectedSport(value);
     }
 
     // fetch places
@@ -148,7 +159,29 @@ const sports = [
       };
     }, [valueM, inputValue, fetch]);
 
+// soumission du formulaire
+    const handleCreateMeet = async () => {
+      try{
+        if(!selectedSport || !value || !valueM) {
+          console.error("Veuillez selectionner un sport, une date, une heure et un lieu.");
+          return;
+        }
 
+        const meetData = {
+          sport_id: selectedSport.id_sport,
+          date: value.format('YYYY-MM-DD'),
+          time: value.format('HH:mm'),
+          location: valueM.description,
+          author_id: 1 // recup l'id de l'auteur (id user)
+        };
+        console.log("Meet Data:", meetData);
+        const response = await axios.post("http://localhost:5000/meet", meetData);
+        console.log(response.data);
+
+      } catch(err) {
+        console.error("Erreur lors de la création du Meet :", err);
+      }
+    }
 
     return (
       <Layout>
@@ -174,8 +207,11 @@ const sports = [
                   disablePortal
                   id="combo-box-demo"
                   options={sports}
+                  getOptionLabel={(option) => option.name}
+                  onChange={handleSportChange}
+                  value={selectedSport}
                   sx={{ width: 300 }}
-                  renderInput={(params) => <TextField {...params} label="Sport" />}
+                  renderInput={(params) => <TextField {...params} label="Choisissez un sport" />}
                 />
                 <section className='datePickerContainer'>
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -251,7 +287,7 @@ const sports = [
                     }}
                   />
                             <section className='submitCreerunMeet'>
-                            <Button variant="contained" endIcon={<AddBoxIcon />}>
+                            <Button variant="contained" endIcon={<AddBoxIcon />} onClick={handleCreateMeet}>
                               Créer un Meet
                             </Button>
                             </section>
