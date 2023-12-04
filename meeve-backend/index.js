@@ -3,7 +3,7 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import usersRoutes from './routes/userRoutes.js'
 import db from './config/db.js'
-import { createUserTable } from './models/userModel.js'; // Import the createUserTable function correctly
+import { createUserTable } from './models/userModel.js'; 
 import { createMeetTable } from './models/meetModel.js';
 import { createSportTable } from './models/sportModel.js';
 
@@ -11,9 +11,9 @@ import { createSportTable } from './models/sportModel.js';
 const app = express();
 const PORT = 5000;
 
-// Call the createUserTable function to create the 'users' table
+
 async function createDB() {
-    createUserTable(); // Corrected function call
+    createUserTable(); 
     createSportTable();
     await createMeetTable();
 }
