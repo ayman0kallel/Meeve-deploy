@@ -89,9 +89,9 @@ dispatch(updateIcon("profile"));
           <Button variant="contained" endIcon={<AddBoxIcon />} component={Link} to="/CreerMeet">
             Créer un Meet
           </Button>
-          <IconButton aria-label="PersonAddOutlinedIcon">
+          {/* <IconButton aria-label="PersonAddOutlinedIcon">
             <PersonAddOutlinedIcon/>
-          </IconButton>
+          </IconButton> */}
           </section>
           <section className='userPersonalInfo'>
             <ul className='itemPersonal'>
