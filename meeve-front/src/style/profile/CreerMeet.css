@@ -98,7 +98,7 @@ fieldset.MuiOutlinedInput-notchedOutline.css-1d3z3hw-MuiOutlinedInput-notchedOut
   @media (min-width: 0px) {
     .css-160unip {
       flex-direction: column;
-      width: 49%;
+      width: 45%;
     }
   }
 
@@ -132,7 +132,7 @@ fieldset.MuiOutlinedInput-notchedOutline.css-1d3z3hw-MuiOutlinedInput-notchedOut
     min-width: 100%;
   }
   .MuiInputBase-root.MuiOutlinedInput-root.MuiInputBase-colorPrimary.MuiInputBase-formControl.MuiInputBase-adornedEnd.css-171nc3l {
-    width: 85%;
+    width: 79%;
 }
 /*
   .css-160unip > .MuiTextField-root {
