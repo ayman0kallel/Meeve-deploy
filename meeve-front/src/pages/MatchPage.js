@@ -8,12 +8,14 @@ import CancelIcon from '@mui/icons-material/Cancel';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { Button } from "@mui/material";
 import axios from "axios";
+import dayjs from "dayjs";
 
 
 //TODO : fix boutons swipe
 
 const MatchPage = () => {
 
+    const [user, setUser] = useState(null);
     const [meets, setMeets] = useState([]);
     const [currentIndex, setCurrentIndex] = useState(meets.length - 1)
     const [lastDirection, setLastDirection] = useState();
@@ -86,7 +88,7 @@ const MatchPage = () => {
                                 </div>
                                 <CardSwipe
                                     title={meet.name}
-                                    date={meet.date}
+                                    date={dayjs(meet.date).format("DD/MM/YYYY")}
                                     time={meet.time}
                                     place={meet.location}
                                 />
