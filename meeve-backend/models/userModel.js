@@ -1,15 +1,19 @@
-/*import db from './db.js'; // Import the database connection
+import db from '../config/db.js'; // Import the database connection
 
 export const createUserTable = async () => {
   try {
-    // SQL query to create the 'users' table
     const createUserTableQuery = `
       CREATE TABLE IF NOT EXISTS users (
         id INT AUTO_INCREMENT PRIMARY KEY,
         firstname VARCHAR(255) NOT NULL,
         lastname VARCHAR(255) NOT NULL,
         email VARCHAR(255) NOT NULL UNIQUE,
-        password VARCHAR(255) NOT NULL
+        password VARCHAR(255) NOT NULL,
+        profileImage VARCHAR(255),
+        favoriteGym VARCHAR(255), 
+        favoriteSport VARCHAR(255), 
+        friendsCount INT,            
+        biography TEXT               
       )
     `;
 
@@ -20,5 +24,4 @@ export const createUserTable = async () => {
   } catch (error) {
     console.error('Error creating user table:', error);
   }
-}; */
-
+};

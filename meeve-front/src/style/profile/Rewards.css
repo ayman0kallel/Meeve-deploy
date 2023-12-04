@@ -1,0 +1,41 @@
+.chooseReward{
+    width: 90%;
+    height: 60%;
+    padding-top: 5%;
+}
+.itemReward{
+    width: 100%;
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+
+}
+.RewardSize{
+    max-width: 40%;
+    min-width: 40%;
+    max-height: 150px;
+    min-height: 150px;
+}
+.rewardsInfoContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+p.MuiTypography-root.MuiTypography-body1.itemTitle.codePromo.css-11lg7ig-MuiTypography-root {
+    text-align: center;
+    line-height: 1;
+    margin-bottom: 10%;
+}
+
+.promo{
+    margin-top: 10% !important;
+    background-color: #00FD90;
+    border-radius: 50px;
+    padding: 2% 20%;
+}
+
+.logoPoints{
+    width: 80%;
+}

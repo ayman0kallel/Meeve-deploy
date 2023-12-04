@@ -190,7 +190,7 @@ const theme = createTheme({
             <div className="meeve-logo">
                     <img src={logo} alt="logo"></img>
                 </div>
-                <section className='backButton'>
+                <section className='backButtonToProfile'>
                 <IconButton  aria-label="Retour" component={Link} to="/Profile">
                   <ArrowBackIosIcon />
                 </IconButton>

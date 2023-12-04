@@ -3,14 +3,15 @@ import { createSlice } from '@reduxjs/toolkit';
 const userProfileSlice = createSlice({
   name: 'userProfile',
   initialState: {
-    username: 'User Name',
+    username: 'Sophie Dubois',
     userLastName: 'nom',
     profileImage: 'https://images.pexels.com/photos/733872/pexels-photo-733872.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
     favoriteGym: 'Basic Fit',
     favoriteSport: 'Fitness',
     friendsCount: 50,
     email:'user@namle.com',
-    biography: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget lorem eu purus feugiat ullamcorper. Vivamus nec quam ut erat malesuada tincidunt in non libero.',
+    biography: "Passionnée par la vie fitness et résidant à Lyon ! En quête d'un(e) partenaire de fitness pour des séances d'entraînement intenses et motivantes. Coach sportive dévouée, je suis prête à partager ma passion pour le sport avec quelqu'un qui partage les mêmes objectifs de santé et de bien-être.",
+    points: 1400,
   },
   reducers: {
     updateUsername: (state, action) => {
@@ -43,6 +44,20 @@ const userProfileSlice = createSlice({
         state.email = action.payload;
         console.log(state.biography);
       },
+      reducePoints: (state, action) => {
+        if(state.points < action.payload){
+          console.log("transaction failed, you dont have enough points" + state.points);
+        }else{
+          state.points -= action.payload;
+          console.log("transaction Succeed, your current points are " + state.points);
+        }
+        
+   
+      },
+      addPoints: (state, action) => {
+        state.points += action.payload;
+        console.log("transaction Succeed, your current points are " + state.points);
+      },
   },
 });
 
@@ -53,6 +68,8 @@ export const {
   updateFavoriteSport,
   updateFriendsCount,
   updateBiography,
+  reducePoints,
+  addPoints,
 } = userProfileSlice.actions;
 
 export default userProfileSlice.reducer;

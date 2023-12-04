@@ -7,7 +7,7 @@ function Layout({ children }) {
   return (
     <ThemeProvider theme={meeveTheme}>
       <div style={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>    
-        <div style={{ flex: 1, padding: '20px', overflowY: 'auto' }}>
+        <div style={{ flex: 1, overflowY: 'auto' }}>
           {children}
         </div>
         <NavigationBar />

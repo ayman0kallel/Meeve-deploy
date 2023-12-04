@@ -8,6 +8,7 @@ import MatchPage from "./pages/MatchPage";
 import EditProfile from "./components/profile/EditProfile"
 import ChooseSport from "./components/profile/ChooseSport"
 import ChoosePlace from "./components/profile/ChoosePlace"
+import  Rewards from "./components/profile/Rewards"
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
           <Route path="/EditProfile" element={<EditProfile/>}/>
           <Route path="/ChooseSport" element={<ChooseSport/>}/>
           <Route path="/ChoosePlace" element={<ChoosePlace/>}/>
+          <Route path= "/Rewards" element= {<Rewards/>}/>
         </Routes>
       </Router>
     </div>

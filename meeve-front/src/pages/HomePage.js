@@ -5,10 +5,8 @@ import Layout from "../components/Layout/Layout";
 export default function HomePage(){
 
     return (
-        <Layout>
-            <div>
+        <Layout style={{}}>
                 <CarteComponent/>
-            </div>
         </Layout>
     );
 

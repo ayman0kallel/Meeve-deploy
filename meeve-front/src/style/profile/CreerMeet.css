@@ -4,8 +4,15 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-image: url("../../assets/img/greenBar.png");
+    background-repeat: no-repeat;
+    background-position-x: right;
+    background-position-y: bottom;
+    background-size: 60%;
 }
-
+.creetMeetContainer>.meeve-logo{
+    margin-top: 3%;
+}
 .logo{
     width: 80%;
     height: 10%;
@@ -14,7 +21,7 @@
 }
 
 .creerMeetFormContainer{
-    width: 100%;
+    width: 90%;
     height: 90%;
 }
 
@@ -44,7 +51,7 @@
     margin-top: 5%;
 }
 .MuiStack-root.css-4jnixx-MuiStack-root {
-    width: 47%;
+    width: 49%;
 }
 .css-4jnixx-MuiStack-root>.MuiTextField-root {
     min-width: 100% !important;
@@ -55,8 +62,8 @@
     display: flex;
     justify-content: center;
 }
-.backButton{
-    width: 100%;
+.backButtonToProfile{
+    width: 90%;
     display: flex;
     justify-content: left;
     padding-bottom: 2%;
@@ -66,4 +73,70 @@
 #combo-box-demo{
     width: 93%;
 }
+*/
+
+button.MuiButtonBase-root.MuiButton-root.MuiButton-contained.MuiButton-containedPrimary.MuiButton-sizeMedium.MuiButton-containedSizeMedium.MuiButton-root.MuiButton-contained.MuiButton-containedPrimary.MuiButton-sizeMedium.MuiButton-containedSizeMedium.css-1gt2dwr-MuiButtonBase-root-MuiButton-root {
+    border-radius: 25px;
+    color: #2d2d2d;
+}
+
+.MuiInputBase-root.MuiOutlinedInput-root.MuiInputBase-colorPrimary.MuiInputBase-fullWidth.MuiInputBase-formControl.MuiInputBase-adornedEnd.MuiAutocomplete-inputRoot.css-atlvux-MuiInputBase-root-MuiOutlinedInput-root {
+    border-radius: 100px;
+}
+fieldset.MuiOutlinedInput-notchedOutline.css-1d3z3hw-MuiOutlinedInput-notchedOutline {
+    border-radius: 100px;
+}
+
+.MuiAutocomplete-root.MuiAutocomplete-hasPopupIcon.css-1pfgy4j {
+    width: 100%;
+    margin-top: 10%;
+  }
+.css-160unip > .MuiTextField-root {
+    min-width: 49%;
+  }
+
+  @media (min-width: 0px) {
+    .css-160unip {
+      flex-direction: column;
+      width: 49%;
+    }
+  }
+
+  .css-feqhe6 {
+    display: inline-flex;
+    flex-direction: column;
+    position: relative;
+    min-width: 0px;
+    padding: 0px;
+    margin: 0px;
+      margin-top: 0px;
+    border: 0px;
+    vertical-align: top;
+    width: 100%;
+    margin-top: 6%;
+  }
+
+  .MuiButtonBase-root.MuiButton-root.MuiButton-contained.MuiButton-containedPrimary.MuiButton-sizeMedium.MuiButton-containedSizeMedium.css-5j1l4h {
+    border-radius: 25px;
+    color: #2d2d2d;
+  }
+
+  .MuiAutocomplete-hasPopupIcon.css-1pfgy4j .MuiOutlinedInput-root, .MuiAutocomplete-hasClearIcon.css-1pfgy4j .MuiOutlinedInput-root {
+    border-radius: 25px;
+  }
+
+  .MuiInputBase-root.MuiOutlinedInput-root.MuiInputBase-colorPrimary.MuiInputBase-formControl.MuiInputBase-adornedEnd.css-171nc3l {
+    border-radius: 25px;
+  }
+  .css-160unip > .MuiTextField-root {
+    min-width: 100%;
+  }
+  .MuiInputBase-root.MuiOutlinedInput-root.MuiInputBase-colorPrimary.MuiInputBase-formControl.MuiInputBase-adornedEnd.css-171nc3l {
+    width: 85%;
+}
+/*
+  .css-160unip > .MuiTextField-root {
+    min-width: 49%;
+    margin-bottom: 12%;
+  }
 */

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import Button from '@mui/material/Button';
@@ -6,11 +6,10 @@ import Typography from '@mui/material/Typography';
 import ManageAccountsOutlinedIcon from '@mui/icons-material/ManageAccountsOutlined';
 import FmdGoodOutlinedIcon from '@mui/icons-material/FmdGoodOutlined';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
-import GroupOutlinedIcon from '@mui/icons-material/GroupOutlined';
 import PersonAddOutlinedIcon from '@mui/icons-material/PersonAddOutlined';
 import AddBoxIcon from '@mui/icons-material/AddBox';
+import LocalActivityOutlinedIcon from '@mui/icons-material/LocalActivityOutlined';
 import Layout from '../components/Layout/Layout.js';
-import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import logo from "../assets/img/LOGO.png";
 
@@ -18,8 +17,9 @@ import "../style/pages/Profile.css";
 import MeetCards from "../components/profile/MeetCards.js";
 import { Link } from 'react-router-dom';
 
-import { useSelector} from 'react-redux'
-import { updateUsername, updateBiography, updateFavoriteGym, updateFavoriteSport,friendsCount } from '../store/userStore'
+import { useSelector, useDispatch} from 'react-redux';
+import {updateIcon} from "../store/navBarStore.js";
+
 
 const theme = createTheme({
   typography: {
@@ -62,16 +62,8 @@ const Profile = () => {
   
 //store
 const userStore = useSelector((state) => state.user) //get
-
-  const userProfile = {
-    username: 'User Name',
-    profileImage: 'https://images.pexels.com/photos/733872/pexels-photo-733872.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-    favoriteGym: 'Basic Fit',
-    favoriteSport:'Fitness',
-    friendsCount: 50,
-    biography:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget lorem eu purus feugiat ullamcorper. Vivamus nec quam ut erat malesuada tincidunt in non libero.',
-  };
+const dispatch = useDispatch();
+dispatch(updateIcon("profile"));
 
   return (
     <Layout>
@@ -103,10 +95,12 @@ const userStore = useSelector((state) => state.user) //get
           </section>
           <section className='userPersonalInfo'>
             <ul className='itemPersonal'>
-                <li className='userItem userFriends'>
-                  <Typography className='itemValue'>{userStore.friendsCount}</Typography>
-                  <Typography className='itemTitle'> <GroupOutlinedIcon className='itemIcon'></GroupOutlinedIcon>   Amies</Typography>
-                </li> 
+              <li className='userItem userFriends'>
+                <Typography className='itemValue itemButton'>{userStore.points}</Typography>
+                <Button variant="contained" startIcon={<LocalActivityOutlinedIcon />} component={Link} to="/Rewards">
+            Voir
+          </Button>
+              </li>
                 <li className='userItem userFavPlace'>
                   <Typography className='itemValue'>{userStore.favoriteGym}</Typography>
                   <Typography className='itemTitle'> <FmdGoodOutlinedIcon className='itemIcon'></FmdGoodOutlinedIcon> Lieu</Typography>
@@ -135,9 +129,6 @@ const userStore = useSelector((state) => state.user) //get
           <MeetCards></MeetCards>
           <MeetCards></MeetCards>
           </div>
-          </section>
-          <section className='contactMeeve'>
-            <Typography className='tileContact'>Nous Contacter <EmailOutlinedIcon></EmailOutlinedIcon></Typography>
           </section>
         </div>
       </ThemeProvider>
