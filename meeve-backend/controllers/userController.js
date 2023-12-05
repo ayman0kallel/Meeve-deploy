@@ -1,4 +1,3 @@
-import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import db from '../config/db.js'
 
@@ -23,7 +22,7 @@ export const createUser = async (req, res) => {
     const [result] = await db.execute(sql, [firstname, lastname, email, hashedPassword]);
 
     if (result.affectedRows === 1) {
-      res.status(201).json({ message: 'User added to the database.', token });
+      res.status(201).json({ message: 'User added to the database.'});
     } else {
       res.status(500).json({ error: 'Failed to add user to the database.' });
     }
