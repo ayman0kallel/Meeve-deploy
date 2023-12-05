@@ -97,7 +97,7 @@ const MatchPage = () => {
                         )}
                     </div>
                 </div>
-                <div className="swipeIcon">
+                {/* <div className="swipeIcon">
                     <Button onClick={() => swipe('left')}>
                         <CancelIcon className="itemIconX"></CancelIcon>
                     </Button>
@@ -105,13 +105,13 @@ const MatchPage = () => {
                         <FavoriteIcon className="itemIconL"></FavoriteIcon>
                     </Button>
                     
-                </div>
+                </div> */}
                 {lastDirection ? (
                     <h2 key={lastDirection} className="infoText">
                         You swiped {lastDirection}
                     </h2>
                 ) : (
-                    <h2>swipe a card or press a button</h2>
+                    <h2>swipe a card</h2>
                 )}
             </div> 
         </Layout>
