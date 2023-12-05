@@ -91,7 +91,7 @@ const getIconColor = (iconName) => {
         </div>
         <div className="icon-container">
           <IconButton style={{ color: getIconColor('message'), margin: '0 8px' }}
-            component={Link} to="/profile"
+            component={Link} to="/ChatList"
             onClick={() => handleIconClick('message')}
             >
             <ChatBubbleOutlineOutlinedIcon sx={{

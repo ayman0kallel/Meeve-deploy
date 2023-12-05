@@ -1,3 +1,4 @@
+import React, { useEffect } from 'react';
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import HomePage from "../src/pages/HomePage"
@@ -8,7 +9,10 @@ import MatchPage from "./pages/MatchPage";
 import EditProfile from "./components/profile/EditProfile"
 import ChooseSport from "./components/profile/ChooseSport"
 import ChoosePlace from "./components/profile/ChoosePlace"
-
+import ChatList from "../src/pages/ChatList"
+import ChatEmmanuel from "./components/ChatEmmanuel"
+import ChatBrigitte from "./components/ChatBrigitte"
+import ChatJoe from "./components/ChatJoe"
 
 function App() {
   return (
@@ -24,6 +28,10 @@ function App() {
           <Route path="/EditProfile" element={<EditProfile/>}/>
           <Route path="/ChooseSport" element={<ChooseSport/>}/>
           <Route path="/ChoosePlace" element={<ChoosePlace/>}/>
+          <Route path="/ChatList" element={<ChatList/>}/>
+          <Route path="/Chat-Emmanuel" element={<ChatEmmanuel/>}/>
+          <Route path="/Chat-Brigitte" element={<ChatBrigitte/>}/>
+          <Route path="/Chat-Joe" element={<ChatJoe/>}/>
         </Routes>
       </Router>
     </div>

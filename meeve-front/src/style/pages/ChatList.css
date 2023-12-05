@@ -1,0 +1,58 @@
+.page-title{
+    margin-left: 5% !important;
+    margin-top: 15% !important;
+    margin-bottom: 3% !important;
+}
+
+.cs-conversation {
+    margin: 1rem;
+    border-radius: 36px;
+    background: #FFF;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    justify-content: left;
+}
+
+.cs-chat-container {
+    height: 100vh;
+    border-radius: 30px 30px 0 0;
+}
+
+.cs-conversation-header {
+    border-radius: 30px 30px 0 0;
+    margin-bottom: .5rem;
+}
+
+.cs-message-input {
+    position: fixed;
+    bottom: 0%;
+    width: 100%;
+}
+
+.cs-message-separator {
+    color: black;
+}
+
+.cs-message-separator::before, .cs-message-separator::after {
+    background-color: #1ccf90 !important
+}
+
+.cs-message__content {
+    background-color: #e1e1e1 !important
+}
+
+.cs-message-input__content-editor-wrapper {
+    border-radius: 25px !important;
+}
+
+.message-bubble {
+    font-family: "Roboto, sans-serif" !important;
+    width: fit-content;
+    max-width: 70%;
+    height: fit-content;
+    position: absolute;
+    right: 3%;
+    padding: .5rem 1rem;
+    margin: .5rem 0;
+    background-color: #1ccf904e;
+    border-radius: 25px;
+}
