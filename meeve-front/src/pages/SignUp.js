@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useState } from 'react';
-import Axios from 'axios'; // Import Axios for making HTTP requests
+import Axios from 'axios';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -21,14 +21,12 @@ import { MeeveTheme } from '../theme/theme';
 function SignUp() {
   const navigate = useNavigate();
   const [error, setError] = useState('');
-  const [users, setUsers] = useState([]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     const formData = new FormData(event.currentTarget);
 
-    // Create an object with user data
     const userData = {
       firstname: formData.get('firstName'),
       lastname: formData.get('lastName'),
@@ -36,27 +34,22 @@ function SignUp() {
       password: formData.get('password'),
     };
 
-    // Check if the email is already registered
-    if (users.some((user) => user.email === userData.email)) {
-      setError('Email address is already in use. Please use a different email.');
-      return;
-    }
-
     try {
       const response = await Axios.post('http://localhost:5000/users', userData);
 
       if (response.status === 201) {
-        // Registration successful, redirect to login page
-        navigate('/');
+        navigate('/'); // Redirect upon successful registration
       } else {
         setError('Registration failed. Please try again later.');
       }
     } catch (error) {
-      console.error('Error:', error);
-      setError('An unexpected error occurred. Please try again later.');
+      if (error.response && error.response.status === 409) {
+        setError('Email address is already in use. Please use a different email.');
+      } else {
+        setError('An unexpected error occurred. Please try again later.');
+      }
     }
   };
-  
   function Copyright(props) {
     return (
       <Typography variant="body2" color="text.secondary" align="center" {...props}>
@@ -134,14 +127,18 @@ function SignUp() {
                   autoComplete="new-password"
                 />
               </Grid>
-              <Grid item xs={12}>
+              {/* <Grid item xs={12}>
                 <FormControlLabel
                   control={<Checkbox value="allowExtraEmails" color="primary" />}
                   label="I want to receive inspiration, marketing promotions and updates via email."
                 />
-              </Grid>
+              </Grid> */}
             </Grid>
-            {error && <p>Error: {error}</p>}
+            {error && (
+            <Typography variant="body2" color="error" align="center">
+              {error}
+            </Typography>
+            )}
             <Button
               type="submit"
               fullWidth

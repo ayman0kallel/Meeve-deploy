@@ -86,3 +86,57 @@ button.MuiButtonBase-root.MuiButton-root.MuiButton-contained.MuiButton-contained
 fieldset.MuiOutlinedInput-notchedOutline.css-1d3z3hw-MuiOutlinedInput-notchedOutline {
     border-radius: 100px;
 }
+
+.MuiAutocomplete-root.MuiAutocomplete-hasPopupIcon.css-1pfgy4j {
+    width: 100%;
+    margin-top: 10%;
+  }
+.css-160unip > .MuiTextField-root {
+    min-width: 49%;
+  }
+
+  @media (min-width: 0px) {
+    .css-160unip {
+      flex-direction: column;
+      width: 49%;
+    }
+  }
+
+  .css-feqhe6 {
+    display: inline-flex;
+    flex-direction: column;
+    position: relative;
+    min-width: 0px;
+    padding: 0px;
+    margin: 0px;
+      margin-top: 0px;
+    border: 0px;
+    vertical-align: top;
+    width: 100%;
+    margin-top: 6%;
+  }
+
+  .MuiButtonBase-root.MuiButton-root.MuiButton-contained.MuiButton-containedPrimary.MuiButton-sizeMedium.MuiButton-containedSizeMedium.css-5j1l4h {
+    border-radius: 25px;
+    color: #2d2d2d;
+  }
+
+  .MuiAutocomplete-hasPopupIcon.css-1pfgy4j .MuiOutlinedInput-root, .MuiAutocomplete-hasClearIcon.css-1pfgy4j .MuiOutlinedInput-root {
+    border-radius: 25px;
+  }
+
+  .MuiInputBase-root.MuiOutlinedInput-root.MuiInputBase-colorPrimary.MuiInputBase-formControl.MuiInputBase-adornedEnd.css-171nc3l {
+    border-radius: 25px;
+  }
+  .css-160unip > .MuiTextField-root {
+    min-width: 100%;
+  }
+  .MuiInputBase-root.MuiOutlinedInput-root.MuiInputBase-colorPrimary.MuiInputBase-formControl.MuiInputBase-adornedEnd.css-171nc3l {
+    width: 79%;
+}
+/*
+  .css-160unip > .MuiTextField-root {
+    min-width: 49%;
+    margin-bottom: 12%;
+  }
+*/

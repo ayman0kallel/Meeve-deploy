@@ -81,3 +81,10 @@
 .modifProfile{
     width: 70%;
 }
+
+.MuiInputBase-root.MuiOutlinedInput-root.MuiInputBase-colorPrimary.MuiInputBase-formControl.css-uk5vo3 {
+    border-radius: 25px;
+  }
+  .MuiInputBase-root.MuiFilledInput-root.MuiFilledInput-underline.MuiInputBase-colorPrimary.MuiInputBase-formControl.MuiInputBase-multiline.css-1vfg5gq {
+    border-radius: 25px;
+  }

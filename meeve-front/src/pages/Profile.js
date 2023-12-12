@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import Button from '@mui/material/Button';
@@ -7,11 +6,10 @@ import Typography from '@mui/material/Typography';
 import ManageAccountsOutlinedIcon from '@mui/icons-material/ManageAccountsOutlined';
 import FmdGoodOutlinedIcon from '@mui/icons-material/FmdGoodOutlined';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
-import GroupOutlinedIcon from '@mui/icons-material/GroupOutlined';
 import PersonAddOutlinedIcon from '@mui/icons-material/PersonAddOutlined';
 import AddBoxIcon from '@mui/icons-material/AddBox';
+import LocalActivityOutlinedIcon from '@mui/icons-material/LocalActivityOutlined';
 import Layout from '../components/Layout/Layout.js';
-import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import logo from "../assets/img/LOGO.png";
 
@@ -91,16 +89,18 @@ dispatch(updateIcon("profile"));
           <Button variant="contained" endIcon={<AddBoxIcon />} component={Link} to="/CreerMeet">
             Créer un Meet
           </Button>
-          <IconButton aria-label="PersonAddOutlinedIcon">
+          {/* <IconButton aria-label="PersonAddOutlinedIcon">
             <PersonAddOutlinedIcon/>
-          </IconButton>
+          </IconButton> */}
           </section>
           <section className='userPersonalInfo'>
             <ul className='itemPersonal'>
-                <li className='userItem userFriends'>
-                  <Typography className='itemValue'>{userStore.friendsCount}</Typography>
-                  <Typography className='itemTitle'> <GroupOutlinedIcon className='itemIcon'></GroupOutlinedIcon>   Amies</Typography>
-                </li> 
+              <li className='userItem userFriends'>
+                <Typography className='itemValue itemButton'>{userStore.points}</Typography>
+                <Button variant="contained" startIcon={<LocalActivityOutlinedIcon />} component={Link} to="/Rewards">
+            Voir
+          </Button>
+              </li>
                 <li className='userItem userFavPlace'>
                   <Typography className='itemValue'>{userStore.favoriteGym}</Typography>
                   <Typography className='itemTitle'> <FmdGoodOutlinedIcon className='itemIcon'></FmdGoodOutlinedIcon> Lieu</Typography>
@@ -129,9 +129,6 @@ dispatch(updateIcon("profile"));
           <MeetCards></MeetCards>
           <MeetCards></MeetCards>
           </div>
-          </section>
-          <section className='contactMeeve'>
-            <Typography className='tileContact'>Nous Contacter <EmailOutlinedIcon></EmailOutlinedIcon></Typography>
           </section>
         </div>
       </ThemeProvider>

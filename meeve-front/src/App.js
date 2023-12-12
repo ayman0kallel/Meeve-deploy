@@ -9,6 +9,8 @@ import MatchPage from "./pages/MatchPage";
 import EditProfile from "./components/profile/EditProfile"
 import ChooseSport from "./components/profile/ChooseSport"
 import ChoosePlace from "./components/profile/ChoosePlace"
+import  Rewards from "./components/profile/Rewards"
+
 import ChatList from "../src/pages/ChatList"
 import ChatEmmanuel from "./components/ChatEmmanuel"
 import ChatBrigitte from "./components/ChatBrigitte"
@@ -28,6 +30,7 @@ function App() {
           <Route path="/EditProfile" element={<EditProfile/>}/>
           <Route path="/ChooseSport" element={<ChooseSport/>}/>
           <Route path="/ChoosePlace" element={<ChoosePlace/>}/>
+          <Route path= "/Rewards" element= {<Rewards/>}/>
           <Route path="/ChatList" element={<ChatList/>}/>
           <Route path="/Chat-Emmanuel" element={<ChatEmmanuel/>}/>
           <Route path="/Chat-Brigitte" element={<ChatBrigitte/>}/>

@@ -111,8 +111,8 @@ const handleInputChange = (event) => {
                         Informations personelles
                     </Typography>
                     <TextField className='prenomContainer' id="prenom" label="Prénom" value={formData.prenom} onChange={handleInputChange} variant="outlined" />
-                    <TextField className='nomContainer' id="nom" label="nom" value={formData.nom} onChange={handleInputChange}  variant="outlined" />
-                    <TextField className='emailContainer' id="email" label="email" value={formData.email} onChange={handleInputChange}  variant="outlined" />
+                    <TextField className='nomContainer' id="nom" label="Nom" value={formData.nom} onChange={handleInputChange}  variant="outlined" />
+                    <TextField className='emailContainer' id="email" label="Email" value={formData.email} onChange={handleInputChange}  variant="outlined" />
                 </section>
                 <section className='description'>
                     <Typography variant="h6" className='title' >
@@ -121,10 +121,10 @@ const handleInputChange = (event) => {
                     <TextField
                       className='aboutMe'
                       id="biography"
-                      label=""
+                      label="ce que j'aime bien..."
                       multiline
                       rows={2}
-                      value={formData.biography} // Utiliza value en lugar de defaultValue
+                      value={formData.biography} 
                       onChange={handleInputChange} 
                       variant="filled"
                     />
