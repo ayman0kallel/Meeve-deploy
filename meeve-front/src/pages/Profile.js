@@ -73,15 +73,12 @@ const { accessToken } = useAuth();
 useEffect(() => {
   const fetchUserProfile = async () => {
     try {
-      console.log(accessToken);
       if (accessToken) {
         const response = await axios.get('http://localhost:5000/profile', {
           headers: {
             Authorization: `${accessToken}`,
           },
         });
-
-        console.log('Response data:', response.data);
         setUser(response.data.user); 
       } else {
         console.error('Access token is missing');
