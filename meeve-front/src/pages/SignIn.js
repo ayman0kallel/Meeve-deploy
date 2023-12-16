@@ -15,6 +15,7 @@ import Container from '@mui/material/Container';
 import {ThemeProvider } from '@mui/material/styles';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { MeeveTheme } from '../theme/theme';
+import { useAuth } from '../AuthContext';
 
 
 function Copyright(props) {
@@ -36,6 +37,7 @@ function Copyright(props) {
 export default function SignIn() {
   const navigate = useNavigate();
   const [error, setError] = useState('');
+  const { saveToken } = useAuth();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -50,10 +52,9 @@ export default function SignIn() {
       const response = await axios.post('http://localhost:5000/users/login', userData);
 
       if (response.status === 200) {
-        const { token } = response.data;
-
-        // Store the token in localStorage
-        localStorage.setItem('token', token);
+        console.log(response.data);
+        console.log("token:" + response.data.accessToken);
+        saveToken(response.data.accessToken);
 
         // Redirect to the dashboard or another page
         navigate('/HomePage', { replace: true });

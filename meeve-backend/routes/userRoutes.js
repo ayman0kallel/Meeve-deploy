@@ -1,12 +1,12 @@
 import express from 'express';
 
-import {createUser, getUsers, getUser, loginUser } from '../controllers/userController.js';
+import {createUser, loginUser } from '../controllers/userController.js';
 
 
 const router = express.Router();
 
 
-router.get('/', getUsers);
+//router.get('/', getUsers);
 
 // add route
 router.post('/', createUser);
@@ -15,6 +15,6 @@ router.post('/', createUser);
 router.post('/login', loginUser);
 
 // user detail route
-router.get('/:id', getUser);
+//router.get('/:id', getUser);
 
 export default router;

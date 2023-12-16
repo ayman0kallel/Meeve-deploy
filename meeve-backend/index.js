@@ -6,6 +6,8 @@ import db from './config/db.js'
 import { createUserTable } from './models/userModel.js'; 
 import { createMeetTable } from './models/meetModel.js';
 import { createSportTable } from './models/sportModel.js';
+import jwt from "jsonwebtoken";
+import { getUserProfile } from './controllers/userController.js';
 
 
 const app = express();
@@ -71,7 +73,26 @@ app.get("/sports", async (req, res) => {
     }
   });
 
+  export const verifyTokenAndGetUserId = (req, res, next) => {
+    const token = req.headers.authorization;
+  
+    if (!token) {
+      return res.status(401).json({ message: 'Unauthorized: Missing token' });
+    }
+  
+    jwt.verify(token, 'MeeveSecretKey', (err, decodedToken) => {
+      if (err) {
+        return res.status(401).json({ message: 'Unauthorized: Invalid token' });
+      }
+  
+      req.userId = decodedToken.id; // Récupère l'ID de l'utilisateur depuis le token
+      next();
+    });
+  };
 
+  app.get('/profile', verifyTokenAndGetUserId, getUserProfile);
+
+  
 
 
 /*

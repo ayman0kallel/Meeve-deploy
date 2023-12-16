@@ -1,7 +1,8 @@
 import bcrypt from 'bcrypt';
 import db from '../config/db.js'
+import jwt from "jsonwebtoken";
 
-let users = [];
+
 export const createUser = async (req, res) => {
   const { firstname, lastname, email, password } = req.body;
 
@@ -59,29 +60,62 @@ export const loginUser = async (req, res) => {
       return res.status(401).json({ error: 'Invalid email or password' });
     }
 
+    const accessToken = jwt.sign({id: user.id}, "MeeveSecretKey");
     // Return a success message or the JWT token to the client
     res.status(200).json({
       message: 'Login successful',
-      user: { id: user.id, firstname: user.firstname, lastname: user.lastname, email: user.email },
+      id: user.id,
+      email:user.email,
+      firstname: user.firstname,
+      accessToken,
     });
+    
+    
   } catch (error) {
     console.error('Error logging in:', error);
     res.status(500).json({ error: 'Internal server error' });
   }
 };
 
-// Get all users
-export const getUsers = (req, res) => {
-  res.status(200).json(users);
+export const getUserById = async (userId) => {
+  try {
+
+    // Exécuter la requête pour récupérer les informations de l'utilisateur
+    const [rows] = await db.execute('SELECT * FROM users WHERE id = ?', [userId]);
+
+    if (rows.length > 0) {
+      // Si des données sont trouvées, retourner les informations de l'utilisateur
+      return rows[0];
+    } else {
+      // Si aucun utilisateur n'est trouvé avec cet ID
+      return null;
+    }
+  } catch (error) {
+    console.error('Error fetching user:', error);
+    throw new Error('Error fetching user');
+  }
 };
 
-// Get a user by ID
-export const getUser = (req, res) => {
-  const { id } = req.params;
-  const foundUser = users.find((user) => user.id === id);
-  if (!foundUser) {
-    return res.status(404).json({ error: 'User not found.' });
+export const getUserProfile = async (req, res) => {
+  const userId = req.userId; // Récupère l'ID de l'utilisateur depuis req.userId
+
+  try {
+    const user = await getUserById(userId);
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    // Renvoie les informations de l'utilisateur
+    res.status(200).json({ user });
+  } catch (error) {
+    res.status(500).json({ message: 'Internal server error' });
   }
-  const { password, ...user} = foundUser;
-  res.status(200).json(user);
 };
+
+
+
+
+
+
+

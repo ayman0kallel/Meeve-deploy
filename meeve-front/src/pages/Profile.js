@@ -19,6 +19,8 @@ import { Link } from 'react-router-dom';
 
 import { useSelector, useDispatch} from 'react-redux';
 import {updateIcon} from "../store/navBarStore.js";
+import axios from 'axios';
+import { useAuth } from '../AuthContext.js';
 
 
 const theme = createTheme({
@@ -61,9 +63,36 @@ const styles = {
 const Profile = () => {
   
 //store
-const userStore = useSelector((state) => state.user) //get
+/*const userStore = useSelector((state) => state.user) //get
 const dispatch = useDispatch();
-dispatch(updateIcon("profile"));
+dispatch(updateIcon("profile"));*/
+
+const [user, setUser] = useState(null);
+const { accessToken } = useAuth();
+
+useEffect(() => {
+  const fetchUserProfile = async () => {
+    try {
+      console.log(accessToken);
+      if (accessToken) {
+        const response = await axios.get('http://localhost:5000/profile', {
+          headers: {
+            Authorization: `${accessToken}`,
+          },
+        });
+
+        console.log('Response data:', response.data);
+        setUser(response.data.user); 
+      } else {
+        console.error('Access token is missing');
+      }
+    } catch (error) {
+      console.error('Error fetching user profile:', error);
+    }
+  };
+
+  fetchUserProfile();
+}, [accessToken]);
 
   return (
     <Layout>
@@ -74,8 +103,8 @@ dispatch(updateIcon("profile"));
                 </div>
           <section className='profileHeaderContainer'>
           <Avatar className='userAvatar'
-            alt={userStore.username}
-            src={userStore.profileImage}
+            alt={user ? user.firstname : ''}
+            src={user ? user.profileImage : ''}
             sx={styles.avatar}
           />
           <section className='profileHeaderButtons'>
@@ -83,7 +112,7 @@ dispatch(updateIcon("profile"));
               <ManageAccountsOutlinedIcon className='settingsButton'/>
               </IconButton>
           </section>
-          <Typography className='userNameProfile' variant="h5">{userStore.username}</Typography>     
+          <Typography className='userNameProfile' variant="h5">{user ? user.firstname : ''} {user ? user.lastname : ''}</Typography>     
           </section>
           <section className='interactionButtonContainer'>
           <Button variant="contained" endIcon={<AddBoxIcon />} component={Link} to="/CreerMeet">
@@ -96,17 +125,17 @@ dispatch(updateIcon("profile"));
           <section className='userPersonalInfo'>
             <ul className='itemPersonal'>
               <li className='userItem userFriends'>
-                <Typography className='itemValue itemButton'>{userStore.points}</Typography>
+                <Typography className='itemValue itemButton'>{user ? user.friendCount : ''}</Typography>
                 <Button variant="contained" startIcon={<LocalActivityOutlinedIcon />} component={Link} to="/Rewards">
             Voir
           </Button>
               </li>
                 <li className='userItem userFavPlace'>
-                  <Typography className='itemValue'>{userStore.favoriteGym}</Typography>
+                  <Typography className='itemValue'>{user ? user.favoriteGym : ''} </Typography>
                   <Typography className='itemTitle'> <FmdGoodOutlinedIcon className='itemIcon'></FmdGoodOutlinedIcon> Lieu</Typography>
                 </li> 
                 <li className='userItem userFavSport'>
-                  <Typography className='itemValue'>{userStore.favoriteSport}</Typography>
+                  <Typography className='itemValue'>{user ? user.favoriteSport : ''}</Typography>
                   <Typography className='itemTitle'> <FavoriteBorderOutlinedIcon className='itemIcon'></FavoriteBorderOutlinedIcon>  Sport</Typography>
                 </li> 
             </ul>
@@ -117,7 +146,7 @@ dispatch(updateIcon("profile"));
               Sur-Moi
             </Typography>
             <Typography variant="body2" className='biographyText'>
-              {userStore.biography}
+              {user ? user.biography : ''}
             </Typography>
           </section>
           <section className='userMeets'>
