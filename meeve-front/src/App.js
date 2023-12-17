@@ -20,7 +20,7 @@ import { AuthProvider } from './AuthContext';
 function App() {
   return (
     <div>
-      <Router>
+      <Router basename="/Meeve-deploy">
         <AuthProvider>
           <Routes>
             <Route path="/" element={<SignIn />} />
