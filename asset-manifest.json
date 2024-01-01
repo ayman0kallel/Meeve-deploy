@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/Meeve-deploy/static/css/main.7117b99b.css",
-    "main.js": "/Meeve-deploy/static/js/main.443528fa.js",
+    "main.js": "/Meeve-deploy/static/js/main.af4c6726.js",
     "static/media/avatar1.jpg": "/Meeve-deploy/static/media/avatar1.c69873e42aeff868337f.jpg",
     "static/media/avatar3.jpg": "/Meeve-deploy/static/media/avatar3.42be9ca32b9f4059c996.jpg",
     "index.html": "/Meeve-deploy/index.html",
     "main.7117b99b.css.map": "/Meeve-deploy/static/css/main.7117b99b.css.map",
-    "main.443528fa.js.map": "/Meeve-deploy/static/js/main.443528fa.js.map"
+    "main.af4c6726.js.map": "/Meeve-deploy/static/js/main.af4c6726.js.map"
   },
   "entrypoints": [
     "static/css/main.7117b99b.css",
-    "static/js/main.443528fa.js"
+    "static/js/main.af4c6726.js"
   ]
 }
