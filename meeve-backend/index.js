@@ -11,7 +11,7 @@ import { getUserProfile } from './controllers/userController.js';
 
 
 const app = express();
-const PORT = 3306;
+const PORT = 3307;
 
 
 async function createDB() {
