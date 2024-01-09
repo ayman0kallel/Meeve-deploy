@@ -10,6 +10,7 @@ import logo from "../../assets/img/LOGO.png";
 import IconButton from '@mui/material/IconButton';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 //popUpConfirmation
 import Dialog from '@mui/material/Dialog';
@@ -79,7 +80,7 @@ const theme = createTheme({
   });
 
   const CreerMeet = () => {
-    
+    const navigate = useNavigate();
     //popup
     const [open, setOpen] = React.useState(false);
 
@@ -195,6 +196,7 @@ const theme = createTheme({
         console.log("Meet Data:", meetData);
         const response = await axios.post("https://meeve-express.onrender.com/meet", meetData);
         console.log(response.data);
+        navigate("/match");
 
       } catch(err) {
         console.error("Erreur lors de la création du Meet :", err);
