@@ -118,7 +118,7 @@ const theme = createTheme({
     useEffect(() => {
       const fetchAllSports = async () => {
         try {
-            const res = await axios.get("https://meeveapi.onrender.com/sports")
+            const res = await axios.get("https://meeve-express.onrender.com/sports")
             setSports(res.data);
         } catch(err) {
             console.log(err)
