@@ -24,7 +24,7 @@ const MatchPage = () => {
     useEffect(() => {
         const fetchAllMeets = async () => {
             try {
-                const res = await axios.get("https://meeveapi.onrender.com/meets")
+                const res = await axios.get("https://meeve-express.onrender.com/meets")
                 setMeets(res.data);
             } catch(err) {
                 console.log(err)

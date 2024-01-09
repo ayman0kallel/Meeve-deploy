@@ -35,7 +35,7 @@ function SignUp() {
     };
 
     try {
-      const response = await Axios.post('https://meeveapi.onrender.com/users', userData);
+      const response = await Axios.post('https://meeve-express.onrender.com/users', userData);
 
       if (response.status === 201) {
         navigate('/'); // Redirect upon successful registration

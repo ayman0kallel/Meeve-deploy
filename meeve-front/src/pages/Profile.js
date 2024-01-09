@@ -74,7 +74,7 @@ useEffect(() => {
   const fetchUserProfile = async () => {
     try {
       if (accessToken) {
-        const response = await axios.get('https://meeveapi.onrender.com/profile', {
+        const response = await axios.get('https://meeve-express.onrender.com/profile', {
           headers: {
             Authorization: `${accessToken}`,
           },
